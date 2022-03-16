@@ -13,7 +13,8 @@ def main():
     main.set_action_object()
     main.generate_combinason()
     main.list_proposal.sort(key=lambda x: x.total_gain, reverse=True)
-    # print(main.list_proposal[0].total_gain)
+    print(main.list_proposal[0].total_gain)
+    print(main.list_proposal[len(main.list_proposal)-1].total_gain)
     end = time.time()
 
     print(end - start)

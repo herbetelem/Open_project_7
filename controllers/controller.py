@@ -45,6 +45,6 @@ class ControllerRunProgram:
             tmp_proposal.list_action.append(action)
             tmp_proposal.budget += action.cost
             tmp_profit += action.profit
-        if tmp_proposal.budget <= self.budget:
+        if tmp_proposal.budget <= self.budget and tmp_profit > self.budget:
             tmp_proposal.total_gain = tmp_profit
             self.list_proposal.append(tmp_proposal)
