@@ -4,7 +4,7 @@
 class Proposal:
     """Object who stock the data about each action"""
 
-    def __init__(self, budget):
+    def __init__(self, budget=0):
 
         self.budget = budget
         self.list_action = []

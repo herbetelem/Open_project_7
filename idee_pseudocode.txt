@@ -1,0 +1,9 @@
+je recupere toute mes action
+
+je les trie en fonction de ce quelle raporte
+
+je parcours ma liste d'action
+    si j'ai plus d'argent que ce que coute l'action
+        je l'achete
+    sinon
+        je passe a la suivante
