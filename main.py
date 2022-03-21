@@ -26,7 +26,7 @@ def main():
 
     end = time.time()
     print("combi", end - start)
-    print("max: ", main.proposal.total_gain)
+    print("max: ", main.proposal["total_gain"])
 
 if __name__ == '__main__':
     main()
