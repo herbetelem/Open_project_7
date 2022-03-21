@@ -21,9 +21,11 @@ class ActionObj:
         self.price = price
         self.profit = profit
 
+
 def powerset(list_action):
     s = list(list_action)
     return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+
 
 start = time.time()
 file_excel = pd.read_excel('../annexe/action.xlsx')
@@ -46,15 +48,12 @@ proposal = {
 }
 
 list_combi = [combi_list for combi_list in powerset(list_action)]
-list_sum = []
 
 for combi_list in list_combi:
-    sum_profit = round(sum(action.profit for action in combi_list), 2)
-    if sum_profit not in list_sum:
-        list_sum.append(sum_profit)
-        tmp_budget = sum(action.cost for action in combi_list)
-        if tmp_budget <= budget and tmp_profit > budget:
-            tmp_profit = sum_profit
+    tmp_budget = sum(action.cost for action in combi_list)
+    if tmp_budget <= budget:
+        tmp_profit = round(sum(action.profit for action in combi_list), 2)
+        if tmp_profit > budget:
             if proposal["total_gain"] < tmp_profit:
                 proposal = {
                     "total_gain": tmp_profit,
@@ -63,13 +62,10 @@ for combi_list in list_combi:
                 }
 
 
-list_sum.sort()
-
 end_2 = time.time()
 print("generer les combi", end_2 - start_2)
 end = time.time()
 print("combi", end - start)
-
 
 
 # (1, 2, 3)
