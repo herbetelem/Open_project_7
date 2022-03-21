@@ -1,15 +1,9 @@
-import pdb
-from re import A
 import pandas as pd
-from itertools import chain, combinations, combinations_with_replacement
-from threading import Thread
+from itertools import chain, combinations
 import time
 
 
 from models.action import ActionObj as m_action
-from models.proposal import Proposal as m_proposal
-
-from controllers.proposal import Proposal as c_proposal
 
 
 class ControllerRunProgram:
@@ -28,14 +22,28 @@ class ControllerRunProgram:
             "budget": 0,
             "list_action": []
         }
+        self.launch_algo()
+
+
+    def launch_algo(self):
+        start = time.time()
+        self.set_action_object()
+        start2 = time.time()
+        self.generate_combinason()
+        end2 = time.time()
+        print("generate combi", end2 - start2)
+        end = time.time()
+        print("combi", end - start)
+        print("max: ", self.proposal["total_gain"])
 
     def set_action_object(self):
-        for data in self.file_excel:
-            self.list_action.append(
-                m_action(data[0], data[1], data[2], round(data[1] * (data[2] + 1), 2)))
+        list_action = [self.list_action.append(m_action(data[0], data[1], data[2], round(
+            data[1] * (data[2] + 1), 2))) for data in self.file_excel]
 
     def generate_combinason(self):
-        list_combi = [self.asynch_combi(item) for item in self.powerset()]
+        # list_combi = [self.asynch_combi(item) for item in self.powerset()]
+        self.list_combi = self.powerset()
+        self.test()
 
     def powerset(self):
         s = list(self.list_action)
@@ -52,3 +60,11 @@ class ControllerRunProgram:
                         "budget": tmp_budget,
                         "list_action": combi_list
                     }
+
+    def test(self):
+        import pdb; pdb.set_trace()
+        self.list_combi.sort(key=lambda x: sum(x.list_action.cost), reverse=True)
+        import pdb; pdb.set_trace()
+
+if __name__ == '__main__':
+    ControllerRunProgram()
