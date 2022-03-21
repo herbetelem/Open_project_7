@@ -36,9 +36,7 @@ class ControllerRunProgram:
         for combi_list in list_combi:
             self.asynch_combi(combi_list)
 
-    def powerset(self):
-        s = list(self.list_action)
-        return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+    
 
     def asynch_combi(self, combi_list):
         tmp_budget = sum(action.cost for action in combi_list)
