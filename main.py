@@ -20,6 +20,7 @@ class ActionModel():
         self.price = price
         self.profit = profit
 
+
 class ControllerRunProgram:
     """Object controller for the all program
     """
@@ -37,7 +38,6 @@ class ControllerRunProgram:
             "list_action": []
         }
         self.launch_algo()
-
 
     def launch_algo(self):
         start = time.time()
@@ -76,9 +76,95 @@ class ControllerRunProgram:
                     }
 
     def test(self):
-        import pdb; pdb.set_trace()
-        self.list_combi.sort(key=lambda x: sum(x.list_action.cost), reverse=True)
-        import pdb; pdb.set_trace()
+        import pdb
+        pdb.set_trace()
+        self.list_combi.sort(key=lambda x: sum(
+            x.list_action.cost), reverse=True)
+        import pdb
+        pdb.set_trace()
+
 
 if __name__ == '__main__':
     ControllerRunProgram()
+
+
+
+
+
+
+
+
+
+
+
+######  Shema de liste de mes objet  #######
+# list = [
+#     {
+#         "name": "combi_1",
+#         "list_action": [
+#             {
+#                 "nom": "action_1",
+#                 "cost": 34,
+#                 "total_gain": 40
+#             },
+#             {
+#                 "nom": "action_2",
+#                 "cost": 34,
+#                 "total_gain": 40
+#             },
+#         ]
+#     },
+#     {
+#         "name": "combi_2",
+#         "list_action": [
+#             {
+#                 "nom": "action_2",
+#                 "cost": 34,
+#                 "total_gain": 40
+#             },
+#             {
+#                 "nom": "action_3",
+#                 "cost": 34,
+#                 "total_gain": 40
+#             },
+#         ]
+#     },
+#     {
+#         "name": "combi_3",
+#         "list_action": [
+#             {
+#                 "nom": "action_1",
+#                 "cost": 34,
+#                 "total_gain": 40
+#             },
+#             {
+#                 "nom": "action_3",
+#                 "cost": 34,
+#                 "total_gain": 40
+#             },
+#         ]
+#     },
+# ]
+
+
+##### Shema itertools #####
+# (1, 2, 3)
+# ()
+
+# (1)
+# (2)
+# (3)
+
+# (1, 2)
+# (1, 3)
+# (2, 1)
+# (2, 3)
+# (3, 1)
+# (3, 2)
+
+# (1, 2, 3)
+# (1, 3, 2)
+# (2, 1, 3)
+# (2, 3, 1)
+# (3, 2, 1)
+# (3, 1, 2)
