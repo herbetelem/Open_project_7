@@ -35,15 +35,11 @@ class ControllerRunProgram:
                 m_action(data[0], data[1], data[2], round(data[1] * (data[2] + 1), 2)))
 
     def generate_combinason(self):
-        list_combi = self.powerset()
-        for combi_list in list_combi:
-            self.asynch_combi(combi_list)
+        list_combi = [self.asynch_combi(item) for item in self.powerset()]
 
     def powerset(self):
         s = list(self.list_action)
-        tmp_list = chain.from_iterable(combinations(s, r)
-                                       for r in range(len(s)+1))
-        return [combi_list for combi_list in tmp_list]
+        return [combi_list for combi_list in chain.from_iterable(combinations(s, r) for r in range(len(s)+1))]
 
     def asynch_combi(self, combi_list):
         tmp_budget = sum(action.cost for action in combi_list)
