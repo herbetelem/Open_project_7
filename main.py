@@ -21,6 +21,7 @@ class ActionModel():
         self.price = price
         self.profit = profit
 
+
 class CombiModel():
     """Object who stock the data about each combinaison of action"""
 
@@ -33,6 +34,7 @@ class CombiModel():
         self.list_action = combi_list
         self.cost = sum(action.cost for action in combi_list)
         self.profit = sum(action.profit for action in combi_list)
+
 
 class ControllerRunProgram:
     """Object controller for the all program
@@ -56,43 +58,40 @@ class ControllerRunProgram:
     def launch_algo(self):
         start = time.time()
         self.set_action_object()
-        # start2 = time.time()
         self.generate_combinason()
-        # self.thread_combi()
-        # end2 = time.time()
-        # print("generate combi", end2 - start2)
         end = time.time()
         print("combi", end - start)
         print("max: ", self.proposal["total_gain"])
 
     def set_action_object(self):
-        list_action = [self.list_action.append(ActionModel(data[0], data[1], data[2], round(
+        [self.list_action.append(ActionModel(data[0], data[1], data[2], round(
             data[1] * (data[2] + 1), 2))) for data in self.file_excel]
 
     def generate_combinason(self):
-        list_combi = [self.check_combi(item) for item in self.powerset()]
+        [self.check_combi(item) for item in self.powerset()]
 
     def powerset(self):
-        s = list(self.list_action) #O(1)
-        return [combi_list for combi_list in chain.from_iterable(combinations(s, r) for r in range(len(s)+1))] #O(n°2)
+        s = list(self.list_action)
+        return [combi_list for combi_list in chain.from_iterable(
+            combinations(s, r) for r in range(len(s)+1))]
 
     def check_combi(self, combi_list):
-        tmp_budget = sum(action.cost for action in combi_list) #O(n°2)
-        if tmp_budget <= self.budget: #O(1)
-            tmp_profit = sum(action.profit for action in combi_list) #O(n°2)
-            if self.proposal["total_gain"] < tmp_profit: #O(1)
+        tmp_budget = sum(action.cost for action in combi_list)
+        if tmp_budget <= self.budget:
+            tmp_profit = sum(action.profit for action in combi_list)
+            if self.proposal["total_gain"] < tmp_profit:
                 self.proposal = {
                     "total_gain": tmp_profit,
                     "budget": tmp_budget,
                     "list_action": combi_list
-                } #O(1)
+                }
 
     def thread_combi(self):
         self.list_full = self.powerset()
         length_to_split = [len(self.list_full)//2]*2
         lst = iter(self.list_full)
         self.double_list = [list(islice(lst, elem))
-                for elem in length_to_split]
+                            for elem in length_to_split]
 
         th1 = Thread(target=self.threading_to_do)
         th2 = Thread(target=self.threading_to_do)
@@ -112,87 +111,6 @@ class ControllerRunProgram:
 
         list_combi = [self.asynch_combi(item) for item in list_combi]
 
+
 if __name__ == '__main__':
     ControllerRunProgram()
-
-
-
-
-
-
-
-
-
-
-
-######  Shema de liste de mes objet  #######
-# list = [
-#     {
-#         "name": "combi_1",
-#         "list_action": [
-#             {
-#                 "nom": "action_1",
-#                 "cost": 34,
-#                 "total_gain": 40
-#             },
-#             {
-#                 "nom": "action_2",
-#                 "cost": 34,
-#                 "total_gain": 40
-#             },
-#         ]
-#     },
-#     {
-#         "name": "combi_2",
-#         "list_action": [
-#             {
-#                 "nom": "action_2",
-#                 "cost": 34,
-#                 "total_gain": 40
-#             },
-#             {
-#                 "nom": "action_3",
-#                 "cost": 34,
-#                 "total_gain": 40
-#             },
-#         ]
-#     },
-#     {
-#         "name": "combi_3",
-#         "list_action": [
-#             {
-#                 "nom": "action_1",
-#                 "cost": 34,
-#                 "total_gain": 40
-#             },
-#             {
-#                 "nom": "action_3",
-#                 "cost": 34,
-#                 "total_gain": 40
-#             },
-#         ]
-#     },
-# ]
-
-
-##### Shema itertools #####
-# (1, 2, 3)
-# ()
-
-# (1)
-# (2)
-# (3)
-
-# (1, 2)
-# (1, 3)
-# (2, 1)
-# (2, 3)
-# (3, 1)
-# (3, 2)
-
-# (1, 2, 3)
-# (1, 3, 2)
-# (2, 1, 3)
-# (2, 3, 1)
-# (3, 2, 1)
-# (3, 1, 2)
