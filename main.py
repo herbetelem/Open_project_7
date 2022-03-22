@@ -1,5 +1,6 @@
+from threading import Thread
 import pandas as pd
-from itertools import chain, combinations
+from itertools import chain, combinations, islice
 import time
 
 
@@ -20,6 +21,18 @@ class ActionModel():
         self.price = price
         self.profit = profit
 
+class CombiModel():
+    """Object who stock the data about each combinaison of action"""
+
+    def __init__(self, combi_list):
+        """ This object will stock all the data for an action
+        Args:
+            combi_list (list object): list of action object
+        """
+
+        self.list_action = combi_list
+        self.cost = sum(action.cost for action in combi_list)
+        self.profit = sum(action.profit for action in combi_list)
 
 class ControllerRunProgram:
     """Object controller for the all program
@@ -37,13 +50,15 @@ class ControllerRunProgram:
             "budget": 0,
             "list_action": []
         }
+        self.check = True
         self.launch_algo()
 
     def launch_algo(self):
         start = time.time()
         self.set_action_object()
         start2 = time.time()
-        self.generate_combinason()
+        # self.generate_combinason()
+        self.thread_combi()
         end2 = time.time()
         print("generate combi", end2 - start2)
         end = time.time()
@@ -56,8 +71,6 @@ class ControllerRunProgram:
 
     def generate_combinason(self):
         list_combi = [self.asynch_combi(item) for item in self.powerset()]
-        # self.list_combi = self.powerset()
-        # self.test()
 
     def powerset(self):
         s = list(self.list_action)
@@ -75,14 +88,42 @@ class ControllerRunProgram:
                         "list_action": combi_list
                     }
 
-    def test(self):
-        import pdb
-        pdb.set_trace()
-        self.list_combi.sort(key=lambda x: sum(
-            x.list_action.cost), reverse=True)
-        import pdb
-        pdb.set_trace()
+    # def test(self):
+    #     s = list(self.list_action)
+    #     return [CombiModel(combi_list) for combi_list in chain.from_iterable(combinations(s, r) for r in range(len(s)+1))]
 
+
+    def thread_combi(self):
+        self.list_full = self.powerset()
+        length_to_split = [len(list_full)//2]*2
+        lst = iter(list_full)
+        self.double_list = [list(islice(lst, elem))
+                for elem in length_to_split]
+
+        th1 = Thread(target=self.threading_to_do)
+        th2 = Thread(target=self.threading_to_do)
+
+        th1.start()
+        th2.start()
+
+        th1.join()
+        th2.join()
+
+    def threading_to_do(self):
+        if self.check:
+            self.check = False
+            list_combi = self.double_list[0]
+        else:
+            list_combi = self.double_list[1]
+
+
+        if self.check:
+            self.check = False
+            list_combi = self.list_full[:self.limiter]
+        else:
+            list_combi = self.list_full[self.limiter:]
+
+        list_combi = [self.asynch_combi(item) for item in list_combi]
 
 if __name__ == '__main__':
     ControllerRunProgram()
