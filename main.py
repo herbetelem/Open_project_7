@@ -56,11 +56,11 @@ class ControllerRunProgram:
     def launch_algo(self):
         start = time.time()
         self.set_action_object()
-        start2 = time.time()
-        # self.generate_combinason()
-        self.thread_combi()
-        end2 = time.time()
-        print("generate combi", end2 - start2)
+        # start2 = time.time()
+        self.generate_combinason()
+        # self.thread_combi()
+        # end2 = time.time()
+        # print("generate combi", end2 - start2)
         end = time.time()
         print("combi", end - start)
         print("max: ", self.proposal["total_gain"])
@@ -70,33 +70,27 @@ class ControllerRunProgram:
             data[1] * (data[2] + 1), 2))) for data in self.file_excel]
 
     def generate_combinason(self):
-        list_combi = [self.asynch_combi(item) for item in self.powerset()]
+        list_combi = [self.check_combi(item) for item in self.powerset()]
 
     def powerset(self):
-        s = list(self.list_action)
-        return [combi_list for combi_list in chain.from_iterable(combinations(s, r) for r in range(len(s)+1))]
+        s = list(self.list_action) #O(1)
+        return [combi_list for combi_list in chain.from_iterable(combinations(s, r) for r in range(len(s)+1))] #O(n°2)
 
-    def asynch_combi(self, combi_list):
-        tmp_budget = sum(action.cost for action in combi_list)
-        if tmp_budget <= self.budget:
-            tmp_profit = sum(action.profit for action in combi_list)
-            if tmp_profit > self.budget:
-                if self.proposal["total_gain"] < tmp_profit:
-                    self.proposal = {
-                        "total_gain": tmp_profit,
-                        "budget": tmp_budget,
-                        "list_action": combi_list
-                    }
-
-    # def test(self):
-    #     s = list(self.list_action)
-    #     return [CombiModel(combi_list) for combi_list in chain.from_iterable(combinations(s, r) for r in range(len(s)+1))]
-
+    def check_combi(self, combi_list):
+        tmp_budget = sum(action.cost for action in combi_list) #O(n°2)
+        if tmp_budget <= self.budget: #O(1)
+            tmp_profit = sum(action.profit for action in combi_list) #O(n°2)
+            if self.proposal["total_gain"] < tmp_profit: #O(1)
+                self.proposal = {
+                    "total_gain": tmp_profit,
+                    "budget": tmp_budget,
+                    "list_action": combi_list
+                } #O(1)
 
     def thread_combi(self):
         self.list_full = self.powerset()
-        length_to_split = [len(list_full)//2]*2
-        lst = iter(list_full)
+        length_to_split = [len(self.list_full)//2]*2
+        lst = iter(self.list_full)
         self.double_list = [list(islice(lst, elem))
                 for elem in length_to_split]
 
@@ -115,13 +109,6 @@ class ControllerRunProgram:
             list_combi = self.double_list[0]
         else:
             list_combi = self.double_list[1]
-
-
-        if self.check:
-            self.check = False
-            list_combi = self.list_full[:self.limiter]
-        else:
-            list_combi = self.list_full[self.limiter:]
 
         list_combi = [self.asynch_combi(item) for item in list_combi]
 
