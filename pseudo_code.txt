@@ -1,0 +1,29 @@
+gerer mes import
+
+
+lire le fichier excel
+
+pour chaque ligne de l'excel
+    je créer un objet action
+        dans cet objet je stock:
+            - le nom
+            - le cout
+            - le cout + benefice
+            - le benefice
+
+Je créer un dictionnaire qui vas stocker ma proposition
+    avec comme clef + valeur:
+        - total gain : 0
+        - budget : 0 
+        - liste d'action :  []
+
+je genere toute les combinaison possible d'action
+
+pour chaque combinaison
+    je calcul le cout total
+    si le cout est inférieur a mon budget
+        je calcul le profit
+        si mon profit est supérieur a la valeur du dictionnaire
+            je remplace mon dico par la proposition en cours
+
+je sort la combinaison gagnante
