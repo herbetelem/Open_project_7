@@ -5,21 +5,27 @@ import time
 
 class ActionModel():
 
-    def __init__(self, name, cost, price, benef):
+    def __init__(self, name, cost, price, moy_percent):
         self.name = name
         self.cost = cost
+
+        if moy_percent > 1:
+            price = round(price * 0.01, 4)
+
         self.price = price
-        self.benef = benef
-        self.profit = cost + benef
+        self.benef = cost * price
+        self.profit = cost + self.benef
 
 
 class ControllerRunProgram:
 
     def __init__(self, budget=500):
         # self.file_excel = pd.read_excel('annexe/action.xlsx')
-        # self.file_excel = pd.read_excel('annexe/dataset1_Python+P7.xlsx')
-        self.file_excel = pd.read_excel('annexe/dataset2_Python+P7.xlsx')
+        self.file_excel = pd.read_excel('annexe/dataset1_Python+P7.xlsx')
+        # self.file_excel = pd.read_excel('annexe/dataset2_Python+P7.xlsx')
+
         self.file_excel = self.file_excel.to_numpy()
+        self.calc_moy()
 
         self.list_action = []
         self.budget = budget
@@ -38,13 +44,15 @@ class ControllerRunProgram:
         self.generate_combinason()
         end = time.time()
         self.proposal["total_gain"] = round(self.proposal["total_gain"], 2)
-        print("combi", end - start)
-        print("max: ", self.proposal["total_gain"])
-        import pdb; pdb.set_trace()
+        # print("combi", end - start)
+        print("max: ", self.proposal["benef"])
+        print("buget: ", self.proposal["budget"])
+
+    def calc_moy(self):
+        self.moy_percent = sum([data[2] for data in self.file_excel]) / len(self.file_excel)
 
     def set_action_object(self):
-        self.list_action = [ActionModel(data[0], data[1], data[2], round(
-            data[1] * data[2], 2)) for data in self.file_excel]
+        self.list_action = [ActionModel(data[0], data[1], data[2], self.moy_percent) for data in self.file_excel]
         self.list_action.sort(key=lambda x: x.benef, reverse=True)
 
     def generate_combinason(self):
