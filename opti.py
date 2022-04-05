@@ -39,10 +39,10 @@ class ControllerRunProgram:
         self.launch_algo()
 
     def launch_algo(self):
-        start = time.time()
+        # start = time.time()
         self.set_action_object()
         self.generate_combinason()
-        end = time.time()
+        # end = time.time()
         self.proposal["total_gain"] = round(self.proposal["total_gain"], 2)
         # print("combi", end - start)
         print("max: ", self.proposal["benef"])
@@ -65,6 +65,8 @@ class ControllerRunProgram:
             self.proposal["benef"] += action.benef
             self.proposal["list_action"].append(action)
             self.budget -= action.cost
+            print(action.name)
+            print(action.cost)
 
 
 if __name__ == '__main__':
