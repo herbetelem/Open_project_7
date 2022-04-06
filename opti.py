@@ -17,12 +17,21 @@ class ActionModel():
         self.profit = cost + self.benef
 
 
+    # demo
+    # ('SHARE-TEST', 200, 10, 23):
+        # self.name = "SHARE-TEST"
+        # self.cost = 200
+        # price 0.1
+        # self.price = 0.1
+        # self.benef = 20
+        # self.profit = 220
+
 class ControllerRunProgram:
 
     def __init__(self, budget=500):
         # self.file_excel = pd.read_excel('annexe/action.xlsx')
-        self.file_excel = pd.read_excel('annexe/dataset1_Python+P7.xlsx')
-        # self.file_excel = pd.read_excel('annexe/dataset2_Python+P7.xlsx')
+        # self.file_excel = pd.read_excel('annexe/dataset1_Python+P7.xlsx')
+        self.file_excel = pd.read_excel('annexe/dataset2_Python+P7.xlsx')
 
         self.file_excel = self.file_excel.to_numpy()
         self.calc_moy()
@@ -59,14 +68,15 @@ class ControllerRunProgram:
         [self.create_combi(action) for action in self.list_action]
 
     def create_combi(self, action):
-        if self.budget >= action.cost and action.cost > 0:
-            self.proposal["total_gain"] += action.profit
-            self.proposal["budget"] += action.cost
-            self.proposal["benef"] += action.benef
-            self.proposal["list_action"].append(action)
-            self.budget -= action.cost
-            print(action.name)
-            print(action.cost)
+        if self.budget >= action.cost and action.cost > 0 and action.benef > 0:
+            if action.price >= (int(max([data[2] for data in self.file_excel])) * 0.01):
+                self.proposal["total_gain"] += action.profit
+                self.proposal["budget"] += action.cost
+                self.proposal["benef"] += action.benef
+                self.proposal["list_action"].append(action)
+                self.budget -= action.cost
+                print(action.name)
+                print(action.cost)
 
 
 if __name__ == '__main__':
