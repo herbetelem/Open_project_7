@@ -11,25 +11,28 @@ Ce projet a pour objectif de créer un algorythme qui vas chercher a trouver par
 - https://numpy.org/ Numpy
 - https://docs.python.org/fr/3/library/itertools.html Itertools
 
+
 ### Prerequisites
 
-il faud installer les requierements avec la commande ``pip3 install -r requirements.txt``, et vos fichier a inspecter doivent être en excel et avoir la ligne 1 en header, puis des la ligne 2 lister les actions
+you have to install the requirements with the command ``pip3 install -r requirements.txt``, and your files to inspect must be in excel and have line 1 in the header, then line 2 list the actions
+
 
 ## Launching
 
-Si vous souhaitez lancer le code brutforce, utilisez la commande ``python3 bruteforce.py`` en vous assurant a la ligne 44 que vous allez inspecter le bon fichier excel d'actions a prospecter
+If you want to run the bruteforce code, use the ``python3 bruteforce.py`` command, making sure at line 44 that you are going to inspect the correct excel file of actions to prospect
 
-
-Si vous souhaitez lancer le code optimized, utilisez la commande ``python3 optimized.py`` en vous assurant a la ligne 25 que vous allez inspecter le bon fichier excel d'actions a prospecter
+If you want to run the optimized code, use the ``python3 optimized.py`` command, making sure on line 25 that you are going to inspect the correct excel file of actions to prospect
 
 
 ## Functional
 
-Une fois que vous avez lancer l'algorythme, vous aurez un résultat en a peu pres 2s pour le bruteforce, et -1s pour le optimized (le temps varie en fonction du nombre d'actions), et ensuite il y aura un print qui vous donnera le gain obtenu, la liste d'action choisie, et le budget dépensé
+Once you have launched the algorithm, you will have a result in about 2s for the bruteforce, and -1s for the optimized (the time varies according to the number of actions), and then there will be a print which will give you the gain obtained, the action list chosen, and the budget spent
 
-Si vous souhaitez voir le temps il faud décommenter les lignes 60, 63, 64 pour le fichier bruteforce, et les lignes 42, 45, 48 pour le fichier optimized, cela vous ajoutera l'information du temps d'execution de l'algorythme dans votre console
+If you want to see the time you have to uncomment lines 60, 63, 64 for the bruteforce file, and lines 42, 45, 48 for the optimized file, this will add the information of the execution time of the algorithm in your console
 
-Si vous souhaitez re générer les graphique de complexité, utiliser la commande ``python3 -m mccabe --dot bruteforce.py | dot -Tpng -o annexe/bruteforce.png`` pour le fichier bruteforce, et la commande ``python3 -m mccabe --dot optimized.py | dot -Tpng -o annexe/optimized.png`` pour le fichier optimized
+If you want to re-generate the complexity graphs, use the command ``python3 -m mccabe --dot bruteforce.py | dot -Tpng -o appendix/bruteforce.png`` for the bruteforce file, and the command ``python3 -m mccabe --dot optimized.py | dot -Tpng -o annex/optimized.png`` for the optimized file
+
+
 ## Made with
 
 * [Visual Studio Code](https://code.visualstudio.com/) - Code editor
