@@ -44,9 +44,11 @@ class ControllerRunProgram:
         self.generate_combinason()
         # end = time.time()
         self.proposal["total_gain"] = round(self.proposal["total_gain"], 2)
+        self.proposal["money_benef"] = round(self.proposal["money_benef"], 2)
         # print("combi", end - start)
         print("max: ", self.proposal["money_benef"])
         print("buget: ", self.proposal["budget"])
+        print("nombre: ", len(self.proposal["list_action"]))
 
     def calc_moy(self):
         self.moy_percent = sum([data[2] for data in self.file_excel]) / len(self.file_excel)
