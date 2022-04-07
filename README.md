@@ -21,7 +21,7 @@ Une fois que vous avez lancer l'algorythme, vous aurez un résultat en a peu pre
 
 Si vous souhaitez voir le temps il faud décommenter les lignes 60, 63, 64 pour le fichier bruteforce, et les lignes 42, 45, 48 pour le fichier optimized, cela vous ajoutera l'information du temps d'execution de l'algorythme dans votre console
 
-
+Si vous souhaitez re générer les graphique de complexité, utiliser la commande ``python3 -m mccabe --dot bruteforce.py | dot -Tpng -o annexe/bruteforce.png`` pour le fichier bruteforce, et la commande ``python3 -m mccabe --dot optimized.py | dot -Tpng -o annexe/optimized.png`` pour le fichier optimized
 ## Made with
 
 * [Visual Studio Code](https://code.visualstudio.com/) - Code editor
