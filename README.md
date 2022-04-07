@@ -3,6 +3,14 @@
 
 Ce projet a pour objectif de créer un algorythme qui vas chercher a trouver parmis une liste d'action, la meilleurs combinaison possible dans le but de generer le plus de profit possible dans une limite d'un budget pres definit
 
+
+### library and tools
+
+- https://github.com/PyCQA/mccabe Mccabe
+- https://pandas.pydata.org/ Pandas
+- https://numpy.org/ Numpy
+- https://docs.python.org/fr/3/library/itertools.html Itertools
+
 ### Prerequisites
 
 il faud installer les requierements avec la commande ``pip3 install -r requirements.txt``, et vos fichier a inspecter doivent être en excel et avoir la ligne 1 en header, puis des la ligne 2 lister les actions
