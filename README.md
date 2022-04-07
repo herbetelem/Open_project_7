@@ -1,7 +1,7 @@
 # Project Openclassroom : Résolver des problèmes en utilisant des algorythmesen Python
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com).
 
-Ce projet a pour objectif de créer un algorythme qui vas chercher a trouver parmis une liste d'action, la meilleurs combinaison possible dans le but de generer le plus de profit possible dans une limite d'un budget pres definit
+This project aims to create an algorithm that will seek to find among a list of actions, the best possible combination in the but to generate the most profit possible within a limit of a budget defined.
 
 
 ### library and tools
