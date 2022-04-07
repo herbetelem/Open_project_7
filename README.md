@@ -5,22 +5,21 @@ Ce projet a pour objectif de créer un algorythme qui vas chercher a trouver par
 
 ### Prerequisites
 
-il faud installer les requierements avec la commande ``pip3 install requirements.txt``
+il faud installer les requierements avec la commande ``pip3 install -r requirements.txt``, et vos fichier a inspecter doivent être en excel et avoir la ligne 1 en header, puis des la ligne 2 lister les actions
 
 ## Launching
 
-Once this requirement have been done, you will only have to open the index.html file into your browser
+Si vous souhaitez lancer le code brutforce, utilisez la commande ``python3 bruteforce.py`` en vous assurant a la ligne 44 que vous allez inspecter le bon fichier excel d'actions a prospecter
+
+
+Si vous souhaitez lancer le code optimized, utilisez la commande ``python3 optimized.py`` en vous assurant a la ligne 25 que vous allez inspecter le bon fichier excel d'actions a prospecter
 
 
 ## Functional
 
-The menu at the top is there to allow you to reach the different parts of the site, the search bar on the other hand is only there to look pretty
-In the section:
-- First section: here, you will have a movie showing, you will have a link to watch it online, see its trailer, and have some information such as the description of the movie, its title, a poster, ...
-- Top 10 section: in this section you will have the top 10 films that come from the api database made available for this project.
-- Category section: in this section you will have the 10 films from the category defined in advance, if you wish to change category, you will have to modify lines 152, 153, 155, 156, 158, 159 with a link such as this ``http://localhost:8000/api/v1/titles/?genre={GENRE}{&min_year=xxxx}``.
-In this link, the ``{GENRE}`` have to be replace by the genre you want to have, and the ``{&min_year=xxxx}`` have to be place if you want to get the movies who have been realised after a precise year, the xxxx respresanted the year.
-- Film info section: once you click on a film, you will have a card that will give you information about the chosen film (director, cast, genre, ...)
+Une fois que vous avez lancer l'algorythme, vous aurez un résultat en a peu pres 2s pour le bruteforce, et -1s pour le optimized (le temps varie en fonction du nombre d'actions), et ensuite il y aura un print qui vous donnera le gain obtenu, la liste d'action choisie, et le budget dépensé
+
+Si vous souhaitez voir le temps il faud décommenter les lignes 60, 63, 64 pour le fichier bruteforce, et les lignes 42, 45, 48 pour le fichier optimized, cela vous ajoutera l'information du temps d'execution de l'algorythme dans votre console
 
 
 ## Made with

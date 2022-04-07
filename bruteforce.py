@@ -57,11 +57,11 @@ class ControllerRunProgram:
         self.launch_algo()
 
     def launch_algo(self):
-        start = time.time()
+        # start = time.time()
         self.set_action_object()
         self.generate_combinason()
-        end = time.time()
-        print("combi", end - start)
+        # end = time.time()
+        # print("combi", end - start)
         print("max: ", self.proposal["total_gain"])
 
     def set_action_object(self):
