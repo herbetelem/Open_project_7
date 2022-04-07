@@ -20,10 +20,9 @@ class ActionModel():
 class ControllerRunProgram:
 
     def __init__(self, budget=500):
-        # self.file_excel = pd.read_excel('annexe/action.xlsx')
+        self.file_excel = pd.read_excel('annexe/action.xlsx')
         # self.file_excel = pd.read_excel('annexe/dataset1_Python+P7.xlsx')
-        self.file_excel = pd.read_excel('annexe/dataset2_Python+P7.xlsx')
-
+        # self.file_excel = pd.read_excel('annexe/dataset2_Python+P7.xlsx')
         self.file_excel = self.file_excel.to_numpy()
         self.calc_moy()
 

@@ -32,6 +32,11 @@ If you want to see the time you have to uncomment lines 60, 63, 64 for the brute
 
 If you want to re-generate the complexity graphs, use the command ``python3 -m mccabe --dot bruteforce.py | dot -Tpng -o appendix/bruteforce.png`` for the bruteforce file, and the command ``python3 -m mccabe --dot optimized.py | dot -Tpng -o annex/optimized.png`` for the optimized file
 
+## Warning
+
+I had a problem with the format of the files that were provided to me, some had the values ​​written ``5%`` while others had ``5``, with the pandas library it's a problem because in the first case, pandas will understand it ``0.05`` or in the second ``5``. To manage this problem, I calculated the average of the percentages, and put a condition ``if average percent > 1`` we will ``value * 0.01``, this allows to manage this format problem.
+Be careful though, in the potential case where the average of the percentages is less than 1, the code will have a problem because it will not multiply them by their true value, for example if we have a value equal to ``0.8``, it will calculate it as ``80%`` and not ``0.8%``.
+
 
 ## Made with
 
