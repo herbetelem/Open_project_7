@@ -67,8 +67,6 @@ class ControllerRunProgram:
                 self.proposal["money_benef"] += action.money_benef
                 self.proposal["list_action"].append(action)
                 self.budget -= action.cost
-                print(action.name)
-
 
 if __name__ == '__main__':
     ControllerRunProgram()

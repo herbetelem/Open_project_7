@@ -30,7 +30,7 @@ Once you have launched the algorithm, you will have a result in about 2s for the
 
 If you want to see the time you have to uncomment lines 60, 63, 64 for the bruteforce file, and lines 42, 45, 48 for the optimized file, this will add the information of the execution time of the algorithm in your console
 
-If you want to re-generate the complexity graphs, use the command ``python3 -m mccabe --dot bruteforce.py | dot -Tpng -o appendix/bruteforce.png`` for the bruteforce file, and the command ``python3 -m mccabe --dot optimized.py | dot -Tpng -o annex/optimized.png`` for the optimized file
+If you want to re-generate the complexity graphs, use the command ``python3 -m mccabe --dot bruteforce.py | dot -Tpng -o annexe/bruteforce.png`` for the bruteforce file, and the command ``python3 -m mccabe --dot optimized.py | dot -Tpng -o annexe/optimized.png`` for the optimized file, but you have to get graphviz one you're computer
 
 ## Warning
 
